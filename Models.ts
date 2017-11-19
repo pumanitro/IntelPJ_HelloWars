@@ -5,7 +5,15 @@ export enum BoardTile {
     Indestructible = 3
 }
 
-export class BotLocation {
+export enum MoveDirection {
+    Up = 0,
+    Down = 1,
+    Right = 2,
+    Left = 3,
+    Stay = null
+}
+
+export class Location {
     x: number;
     y: number;
 
@@ -17,10 +25,20 @@ export class BotLocation {
     }
 }
 
+export interface IBomb {
+    RoundsUntilExplodes: number,
+    Location: Location,
+    ExplosionRadius: number
+}
+
 export interface IBattleFieldInfo{
     RoundNumber: number; //"RoundNumber": 3,
     Board: Array<Array<BoardTile>> //"Board": [[2,2,3],[0,0,1],[0,0,0]]
-    BotLocation
+    BotLocation: Location; // ---converted--> for instance of BotLocation
+    IsMissileAvailable: boolean;
+    OpponentLocations: Array<Location>;
+    Bombs: Array<IBomb>;
+
 }
 
 /*
