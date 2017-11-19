@@ -31,6 +31,22 @@ export interface IBomb {
     ExplosionRadius: number
 }
 
+export interface IMissile {
+    MoveDirection: MoveDirection;
+    Location: Location;
+    ExplosionRadius: number;
+}
+
+export interface IGameConfig {
+    MapWidth: number;
+    MapHeight: number;
+    BombBlastRadius: number;
+    MissileBlastRadius: number;
+    RoundsBetweenMissiles: number;
+    RoundsBeforeIncreasingBlastRadius: number;
+    IsFastMissileModeEnabled: boolean;
+}
+
 export interface IBattleFieldInfo{
     RoundNumber: number; //"RoundNumber": 3,
     Board: Array<Array<BoardTile>> //"Board": [[2,2,3],[0,0,1],[0,0,0]]
@@ -38,7 +54,8 @@ export interface IBattleFieldInfo{
     IsMissileAvailable: boolean;
     OpponentLocations: Array<Location>;
     Bombs: Array<IBomb>;
-
+    Missiles: Array<IMissile>;
+    GameConfig: IGameConfig;
 }
 
 /*
