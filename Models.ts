@@ -10,8 +10,10 @@ export class BotLocation {
     y: number;
 
     constructor(locationString: string){
-        this.x = Number(locationString[0]);
-        this.x = Number(locationString[0]);
+        let splittedLocation = locationString.split(', ');
+
+        this.x = Number(splittedLocation[0]);
+        this.y = Number(splittedLocation[1]);
     }
 }
 
