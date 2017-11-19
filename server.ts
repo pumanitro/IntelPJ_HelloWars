@@ -1,4 +1,4 @@
-import {BattleFieldInfo} from "./Models";
+import {BattleFieldInfo} from "./GameModels";
 
 const express = require('express');
 const app = express();
@@ -27,6 +27,8 @@ app.get('/Info', (req, res) => res.send({
 app.post('/PerformNextMove', (req, res) => {
 
     let battleFieldInfo = new BattleFieldInfo(req.body);
+
+
 
     /*const config = {
         scoreFunction 		: scoreFunction,
