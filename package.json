@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "compile-ts": "tsc server.ts --sourceMap"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +17,7 @@
     "express": "^4.16.2"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.6",
+    "@types/jest": "^16.0.5",
     "jest": "^21.2.1",
     "ts-jest": "^21.2.3",
     "typescript": "^2.6.1"

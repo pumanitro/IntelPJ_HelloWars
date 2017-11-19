@@ -47,21 +47,37 @@ export interface IGameConfig {
     IsFastMissileModeEnabled: boolean;
 }
 
-export interface IBattleFieldInfo{
+export class BattleFieldInfo {
+
     RoundNumber: number; //"RoundNumber": 3,
-    Board: Array<Array<BoardTile>> //"Board": [[2,2,3],[0,0,1],[0,0,0]]
+    BotId: string;
+    Board: Array<Array<BoardTile>>; //"Board": [[2,2,3],[0,0,1],[0,0,0]]
     BotLocation: Location; // ---converted--> for instance of BotLocation
     IsMissileAvailable: boolean;
     OpponentLocations: Array<Location>;
     Bombs: Array<IBomb>;
     Missiles: Array<IMissile>;
     GameConfig: IGameConfig;
+
+    constructor(notPreparedBattleFieldInfo) {
+        this.RoundNumber = notPreparedBattleFieldInfo.RoundNumber;
+        this.BotId = notPreparedBattleFieldInfo.BotId;
+        this.Board = notPreparedBattleFieldInfo.Board;
+        this.BotLocation = new Location(notPreparedBattleFieldInfo.BotLocation);
+        this.IsMissileAvailable = notPreparedBattleFieldInfo.IsMissileAvailableln;
+
+        this.OpponentLocations = notPreparedBattleFieldInfo.OpponentLocations.map(location => new Location(location));
+        this.Bombs = notPreparedBattleFieldInfo.Bombs;
+        this.Missiles = notPreparedBattleFieldInfo.Missiles;
+        this.GameConfig = notPreparedBattleFieldInfo.GameConfig;
+
+    };
 }
 
 /*
 
 {
-
+    "RoundNumber": 3,
     "BotId": "a88454b0‐80ba‐4c10‐b162‐f1ca766f1e3f",
     "Board": [
     [

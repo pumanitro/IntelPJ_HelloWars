@@ -1,3 +1,5 @@
+import {BattleFieldInfo} from "./Models";
+
 const express = require('express');
 const app = express();
 
@@ -20,6 +22,8 @@ app.get('/Info', (req, res) => res.send({
 
 app.post('/PerformNextMove', (req, res) => {
 
+    let battleFieldInfo = new BattleFieldInfo(req.body);
+/*
     const config = {
         scoreFunction 		: scoreFunction,
         generateMoves		: generateMovesFunction,
@@ -29,7 +33,7 @@ app.post('/PerformNextMove', (req, res) => {
         depth 			: 1
     };
 
-    const alphabeta = AlphaBetaConstructor( config );
+    const alphabeta = AlphaBetaConstructor( config );*/
 
     res.send({
     "Direction": 1,
