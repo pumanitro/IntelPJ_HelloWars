@@ -37,6 +37,10 @@ export class Bomb {
         this.ExplosionRadius = ExplosionRadius;
     }
 
+    shouldExplode(): boolean {
+        return this.RoundsUntilExplodes === 0;
+    }
+
 }
 
 export class Missile {

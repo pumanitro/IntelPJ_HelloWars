@@ -43,8 +43,8 @@ app.post('/PerformNextMove', (req, res) => {
     const alphabeta = AlphaBetaConstructor( config );*/
 
     let direction = getRandomInt(0,3);
-    let action = getRandomInt(0,1);
-    //let action = getRandomInt(0,1) === 1 ? 2 : 0;
+    //let action = getRandomInt(0,1);
+    let action = getRandomInt(0,1) === 1 ? 2 : 0;
 
     res.send({
         "Direction": direction,
