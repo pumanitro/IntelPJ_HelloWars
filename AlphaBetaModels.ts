@@ -1,12 +1,12 @@
-import {BattleFieldInfo, BoardTile, IBomb, IMissile, Location} from "./GameModels";
+import {BattleFieldInfo, BoardTile, Bomb, Missile, Location} from "./GameModels";
 
-export default class State {
+export class State {
 
     Board: Array<Array<BoardTile>>; //"Board": [[2,2,3],[0,0,1],[0,0,0]]
     BotLocation: Location; // ---converted--> for instance of BotLocation
     OpponentLocations: Array<Location>;
-    Bombs: Array<IBomb>;
-    Missiles: Array<IMissile>;
+    Bombs: Array<Bomb>;
+    Missiles: Array<Missile>;
 
     constructor(battleFieldInfo: BattleFieldInfo) {
         this.Board = battleFieldInfo.Board;

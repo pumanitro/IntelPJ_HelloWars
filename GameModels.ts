@@ -25,16 +25,32 @@ export class Location {
     }
 }
 
-export interface IBomb {
-    RoundsUntilExplodes: number,
-    Location: Location,
-    ExplosionRadius: number
+export class Bomb {
+
+    RoundsUntilExplodes: number;
+    Location: Location;
+    ExplosionRadius: number;
+
+    constructor( RoundsUntilExplodes: number, Location: Location, ExplosionRadius: number ) {
+        this.RoundsUntilExplodes = RoundsUntilExplodes;
+        this.Location = Location;
+        this.ExplosionRadius = ExplosionRadius;
+    }
+
 }
 
-export interface IMissile {
+export class Missile {
+
     MoveDirection: MoveDirection;
     Location: Location;
     ExplosionRadius: number;
+
+    constructor( MoveDirection: MoveDirection, Location: Location, ExplosionRadius: number ) {
+        this.MoveDirection = MoveDirection;
+        this.Location = Location;
+        this.ExplosionRadius = ExplosionRadius;
+    }
+
 }
 
 export interface IGameConfig {
@@ -55,8 +71,8 @@ export class BattleFieldInfo {
     BotLocation: Location; // ---converted--> for instance of BotLocation
     IsMissileAvailable: boolean;
     OpponentLocations: Array<Location>;
-    Bombs: Array<IBomb>;
-    Missiles: Array<IMissile>;
+    Bombs: Array<Bomb>;
+    Missiles: Array<Missile>;
     GameConfig: IGameConfig;
 
     constructor(notPreparedBattleFieldInfo) {
@@ -67,8 +83,26 @@ export class BattleFieldInfo {
         this.IsMissileAvailable = notPreparedBattleFieldInfo.IsMissileAvailableln;
 
         this.OpponentLocations = notPreparedBattleFieldInfo.OpponentLocations.map(location => new Location(location));
-        this.Bombs = notPreparedBattleFieldInfo.Bombs;
-        this.Missiles = notPreparedBattleFieldInfo.Missiles;
+        this.Bombs = notPreparedBattleFieldInfo.Bombs.map(bomb => {
+
+            return new Bomb(
+                bomb.RoundsUntilExplodes,
+                new Location(bomb.Location),
+                bomb.ExplosionRadius
+            );
+
+        });
+
+        this.Missiles = notPreparedBattleFieldInfo.Missiles.map(missile => {
+
+            return new Missile(
+                missile.MoveDirection,
+                new Location(missile.Location),
+                missile.ExplosionRadius
+            );
+
+        });
+
         this.GameConfig = notPreparedBattleFieldInfo.GameConfig;
 
     };

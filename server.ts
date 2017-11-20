@@ -1,4 +1,5 @@
 import {BattleFieldInfo} from "./GameModels";
+import {State} from "./AlphaBetaModels";
 
 const express = require('express');
 const app = express();
@@ -28,24 +29,27 @@ app.post('/PerformNextMove', (req, res) => {
 
     let battleFieldInfo = new BattleFieldInfo(req.body);
 
-
+    let state = new State(battleFieldInfo);
 
     /*const config = {
         scoreFunction 		: scoreFunction,
         generateMoves		: generateMovesFunction,
         checkWinConditions 	: checkWinConditionsFunction,
         uniqueKey		: uniqueKeyFunction,
-        state 			: yourInitialStateObject,
+        state 			: state,
         depth 			: 1
     };
 
     const alphabeta = AlphaBetaConstructor( config );*/
 
     let direction = getRandomInt(0,3);
+    let action = getRandomInt(0,1);
+    //let action = getRandomInt(0,1) === 1 ? 2 : 0;
 
     res.send({
         "Direction": direction,
-        "Action": 0,
+        "Action": action,
+        // "Action": getRandomInt(0,1) === 1 ? 2 : 0,
         "FireDirection": 0
     });
 
