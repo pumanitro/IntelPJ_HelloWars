@@ -1,5 +1,5 @@
-import {BattleFieldInfo} from "./GameModels";
-import {State} from "./AlphaBetaModels";
+import {BattleFieldInfo} from "./Models/GameModels";
+import {State} from "./Models/AlphaBetaModels";
 
 const express = require('express');
 const app = express();

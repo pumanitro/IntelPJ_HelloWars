@@ -1,3 +1,6 @@
+import Bomb from './Bomb';
+import Missile from './Missile';
+
 export enum BoardTile {
     Empty = 0,
     Regular = 1,
@@ -23,38 +26,6 @@ export class Location {
         this.x = Number(splittedLocation[0]);
         this.y = Number(splittedLocation[1]);
     }
-}
-
-export class Bomb {
-
-    RoundsUntilExplodes: number;
-    Location: Location;
-    ExplosionRadius: number;
-
-    constructor( RoundsUntilExplodes: number, Location: Location, ExplosionRadius: number ) {
-        this.RoundsUntilExplodes = RoundsUntilExplodes;
-        this.Location = Location;
-        this.ExplosionRadius = ExplosionRadius;
-    }
-
-    shouldExplode(): boolean {
-        return this.RoundsUntilExplodes === 0;
-    }
-
-}
-
-export class Missile {
-
-    MoveDirection: MoveDirection;
-    Location: Location;
-    ExplosionRadius: number;
-
-    constructor( MoveDirection: MoveDirection, Location: Location, ExplosionRadius: number ) {
-        this.MoveDirection = MoveDirection;
-        this.Location = Location;
-        this.ExplosionRadius = ExplosionRadius;
-    }
-
 }
 
 export interface IGameConfig {

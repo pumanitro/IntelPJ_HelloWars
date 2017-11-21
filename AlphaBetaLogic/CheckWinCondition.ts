@@ -1,4 +1,4 @@
-import {State} from "./AlphaBetaModels";
+import {State} from "../Models/AlphaBetaModels";
 
 export default function checkWinConditionsFunction(actualState: State ) {
 

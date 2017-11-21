@@ -1,4 +1,6 @@
-import {BattleFieldInfo, BoardTile, Bomb, Missile, Location} from "./GameModels";
+import {BattleFieldInfo, BoardTile, Location} from "./GameModels";
+import Bomb from './Bomb';
+import Missile from './Missile';
 
 export class State {
 

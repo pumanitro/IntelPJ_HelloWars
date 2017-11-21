@@ -1,4 +1,4 @@
-import { Location } from './Models';
+import { Location } from './GameModels';
 
 describe('BotLocation', () => {
     it('Should set x, y property of the new class when contructed from a string for single and single position', () => {
