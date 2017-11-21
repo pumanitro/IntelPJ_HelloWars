@@ -7,8 +7,8 @@ export class State {
     Board: Array<Array<BoardTile>>; //"Board": [[2,2,3],[0,0,1],[0,0,0]]
     BotLocation: Location; // ---converted--> for instance of BotLocation
     OpponentLocations: Array<Location>;
-    Bombs: Array<Bomb>;
-    Missiles: Array<Missile>;
+    Bombs: Map<Location, Bomb>;
+    Missiles: Map<Location, Missile>;
 
     constructor(battleFieldInfo: BattleFieldInfo) {
         this.Board = battleFieldInfo.Board;

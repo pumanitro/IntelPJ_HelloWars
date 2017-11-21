@@ -1,4 +1,6 @@
 import {MoveDirection, Location} from "./GameModels";
+import {State} from "./AlphaBetaModels";
+import {BoardTile} from "./GameModels";
 
 export default class Missile {
 
@@ -10,6 +12,16 @@ export default class Missile {
         this.MoveDirection = MoveDirection;
         this.Location = Location;
         this.ExplosionRadius = ExplosionRadius;
+    }
+
+    shouldLocationCauseExplosion(location: Location, state: State) {
+        if(state.Board[location.x][location.y] === BoardTile.Empty) {
+
+        }
+    }
+
+    shouldExplode() {
+
     }
 
 }
