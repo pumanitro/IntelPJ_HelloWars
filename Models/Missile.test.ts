@@ -1,5 +1,5 @@
-import {isSomeBombOnLocation} from "./Missile";
-import {Location} from "./GameModels";
+import {isSomeBombOnLocation, default as Missile, isSomeMissileOnLocation} from "./Missile";
+import {Location, MoveDirection} from "./GameModels";
 import Bomb from "./Bomb";
 import {State} from "./AlphaBetaModels";
 import {MockedBattleFieldInfo} from "./MockState";
@@ -22,4 +22,21 @@ describe('isSomeBombOnLocation', () => {
         expect(isSomeBombOnLocation(new Location('5, 5'), mockGameState)).toBe(false);
     });
 
+});
+
+describe('isSomeMissileOnLocation', () => {
+
+    mockGameState.Missiles.push(new Missile(
+        MoveDirection.Up,
+        new Location('3, 3'),
+        2
+    ));
+
+    it('should return true if there is a missile in a given state on given location', () => {
+        expect(isSomeMissileOnLocation(new Location('3, 3'), mockGameState)).toBe(true);
+    });
+
+    it('should return false if there is a missile in a given state on given location', () => {
+        expect(isSomeMissileOnLocation(new Location('9, 9'), mockGameState)).toBe(false);
+    });
 });
