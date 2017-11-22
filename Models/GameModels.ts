@@ -46,9 +46,10 @@ export class BattleFieldInfo {
     BotLocation: Location; // ---converted--> for instance of BotLocation
     IsMissileAvailable: boolean;
     OpponentLocations: Array<Location>;
-    Bombs: Map<Location, Bomb>;
-    Missiles: Map<Location, Missile>;
+    Bombs: Array<Bomb>;
+    Missiles: Array<Missile>;
     GameConfig: IGameConfig;
+    mapTest;
 
     constructor(notPreparedBattleFieldInfo) {
         this.RoundNumber = notPreparedBattleFieldInfo.RoundNumber;
@@ -59,29 +60,23 @@ export class BattleFieldInfo {
 
         this.OpponentLocations = notPreparedBattleFieldInfo.OpponentLocations.map(location => new Location(location));
 
-        this.Bombs = new Map();
-        notPreparedBattleFieldInfo.Bombs.forEach(bomb => {
+        this.Bombs = notPreparedBattleFieldInfo.Bombs.map(bomb => {
 
-            let newBomb = new Bomb(
+            return new Bomb(
                 bomb.RoundsUntilExplodes,
                 new Location(bomb.Location),
                 bomb.ExplosionRadius
             );
-
-            this.Bombs.set(newBomb.Location, newBomb);
-
         });
 
-        this.Missiles = new Map();
-        notPreparedBattleFieldInfo.Missiles.forEach(missile => {
+        //console.warn(this.Missiles2.get('blu').Location.x);
+        this.Missiles = notPreparedBattleFieldInfo.Missiles.map(missile => {
 
-            let newMissile = new Missile(
+            return new Missile(
                 missile.MoveDirection,
                 new Location(missile.Location),
                 missile.ExplosionRadius
             );
-
-            this.Missiles.set(newMissile.Location, newMissile);
 
         });
 

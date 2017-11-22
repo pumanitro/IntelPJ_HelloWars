@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "compile-ts": "tsc server.ts --sourceMap"
+    "compile-ts": "tsc --project tsconfig.json"
   },
   "author": "",
   "license": "ISC",
