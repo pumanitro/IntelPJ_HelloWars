@@ -1,4 +1,5 @@
-import {BattleFieldInfo, BoardTile, Location} from "./GameModels";
+import {BattleFieldInfo, BoardTile} from "./GameModels";
+import {Location} from "./Location";
 import Bomb from './Bomb';
 import Missile from './Missile';
 

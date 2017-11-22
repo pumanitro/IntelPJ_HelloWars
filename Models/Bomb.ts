@@ -1,4 +1,4 @@
-import {Location} from './GameModels';
+import {Location} from "./Location";
 
 export default class Bomb {
 

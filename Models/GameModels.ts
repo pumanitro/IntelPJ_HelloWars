@@ -1,5 +1,6 @@
 import Bomb from './Bomb';
 import Missile from './Missile';
+import {Location} from "./Location";
 
 export enum BoardTile {
     Empty = 0,
@@ -14,18 +15,6 @@ export enum MoveDirection {
     Right = 2,
     Left = 3,
     Stay = null
-}
-
-export class Location {
-    x: number;
-    y: number;
-
-    constructor(locationString: string){
-        let splittedLocation = locationString.split(', ');
-
-        this.x = Number(splittedLocation[0]);
-        this.y = Number(splittedLocation[1]);
-    }
 }
 
 export interface IGameConfig {

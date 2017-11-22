@@ -1,5 +1,6 @@
 import {isSomeBombOnLocation, default as Missile, isSomeMissileOnLocation} from "./Missile";
-import {Location, MoveDirection} from "./GameModels";
+import {MoveDirection} from "./GameModels";
+import {Location} from "./Location";
 import Bomb from "./Bomb";
 import {State} from "./AlphaBetaModels";
 import {MockedBattleFieldInfo} from "./MockState";

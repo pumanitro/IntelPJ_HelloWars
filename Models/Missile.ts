@@ -1,4 +1,5 @@
-import {MoveDirection, Location} from "./GameModels";
+import {MoveDirection} from "./GameModels";
+import {Location} from "./Location";
 import {State} from "./AlphaBetaModels";
 import {BoardTile} from "./GameModels";
 
