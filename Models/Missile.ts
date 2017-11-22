@@ -2,6 +2,14 @@ import {MoveDirection, Location} from "./GameModels";
 import {State} from "./AlphaBetaModels";
 import {BoardTile} from "./GameModels";
 
+export function isSomeBombOnLocation(location: Location, state: State) {
+    return state.Bombs.some((bomb) => { return (bomb.Location.x === location.x && bomb.Location.y === location.y)});
+}
+
+export function isSomeMissileOnLocation(location: Location, state: State) {
+    return state.Missiles.some((missile) => { return (missile.Location.x === location.x && missile.Location.y === location.y)});
+}
+
 export default class Missile {
 
     MoveDirection: MoveDirection;
@@ -15,9 +23,11 @@ export default class Missile {
     }
 
     shouldLocationCauseExplosion(location: Location, state: State) {
-        if(state.Board[location.x][location.y] === BoardTile.Empty) {
 
-        }
+        let isBombOnTheWay = isSomeBombOnLocation(location, state);
+        let isMissileOnTheWay = isSomeMissileOnLocation(location, state);
+
+        return state.Board[location.x][location.y] === BoardTile.Empty && !isBombOnTheWay && !isMissileOnTheWay;
     }
 
     shouldExplode() {
