@@ -27,15 +27,19 @@ export default class Missile {
 
         let isBombOnTheWay = isSomeBombOnLocation(this.Location, state);
         let isMissileOnTheWay = isSomeMissileOnLocation(this.Location, state);
+        let isTileOccupied = state.Board[this.Location.x][this.Location.y] !== BoardTile.Empty;
 
-        return state.Board[this.Location.x][this.Location.y] === BoardTile.Empty && !isBombOnTheWay && !isMissileOnTheWay;
+        return isTileOccupied || isBombOnTheWay || isMissileOnTheWay;
     }
 
     shouldExplode(state: State) {
 
+        //todo : Check the if isTHeFastMissileMode on or off !
         this.Location.move(this.MoveDirection);
-        this.shouldExplode(state);
+        let shouldMissileExplode = this.shouldLocationCauseExplosion(state);
         this.Location.moveBackwards(this.MoveDirection);
+
+        return shouldMissileExplode;
 
     }
 

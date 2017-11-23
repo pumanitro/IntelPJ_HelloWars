@@ -5,10 +5,10 @@ export class Location {
     y: number;
 
     constructor(locationString: string){
-        let splittedLocation = locationString.split(', ');
+        let splitLocation = locationString.split(', ');
 
-        this.x = Number(splittedLocation[0]);
-        this.y = Number(splittedLocation[1]);
+        this.x = Number(splitLocation[0]);
+        this.y = Number(splitLocation[1]);
     }
 
     move(direction: MoveDirection) {
