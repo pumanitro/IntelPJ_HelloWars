@@ -38,7 +38,6 @@ export class BattleFieldInfo {
     Bombs: Array<Bomb>;
     Missiles: Array<Missile>;
     GameConfig: IGameConfig;
-    mapTest;
 
     constructor(notPreparedBattleFieldInfo) {
         this.RoundNumber = notPreparedBattleFieldInfo.RoundNumber;

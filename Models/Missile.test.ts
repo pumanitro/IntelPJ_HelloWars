@@ -44,16 +44,49 @@ describe('isSomeMissileOnLocation', () => {
 
 describe('shouldExplode', () => {
 
-    let missile = new Missile(MoveDirection.Up, new Location("2, 2"), 1);
+    let missile = new Missile(MoveDirection.Up, new Location("1, 1"), 1);
 
-    it('return true if missile will be on the Regular Tile on the next round.', () => {
+    it('return true if missile will be on the Regular, Fortified, Indestructible Tile on the next round. (Without any additional bombs and missiles)', () => {
 
-        mockState.Board[2][1] = BoardTile.Regular;
+        mockState.Bombs = [];
+        mockState.Missiles = [];
+
+        mockState.Board[1][0] = BoardTile.Regular;
+        expect(missile.shouldExplode(mockState)).toBe(true);
+
+        mockState.Board[1][0] = BoardTile.Fortified;
+        expect(missile.shouldExplode(mockState)).toBe(true);
+
+        mockState.Board[1][0] = BoardTile.Indestructible;
+        expect(missile.shouldExplode(mockState)).toBe(true);
+    });
+
+    it('return false if missile will be on the Empty tile on the next round. (Without any additional bombs and missiles)', () => {
+
+        mockState.Bombs = [];
+        mockState.Missiles = [];
+
+        mockState.Board[1][0] = BoardTile.Empty;
+        expect(missile.shouldExplode(mockState)).toBe(false);
+    });
+
+    it('return true is there is some obstacle on the way (bomb or another missile)', () => {
+        mockState.Bombs.push(new Bomb(1, new Location("1, 0"), 1));
+        mockState.Missiles = [];
+
+        mockState.Board[1][0] = BoardTile.Empty;
+        expect(missile.shouldExplode(mockState)).toBe(true);
+
+        mockState.Bombs = [];
+        mockState.Missiles.push(new Missile(MoveDirection.Up, new Location("1, 0"), 1));
 
         expect(missile.shouldExplode(mockState)).toBe(true);
     });
 
     it('return true if the missile will reach edge of the map in the next turn', () => {
+        missile.MoveDirection = MoveDirection.Up;
+        missile.Location = new Location("0, 0");
 
+        expect(missile.shouldExplode(mockState)).toBe(true);
     });
 });

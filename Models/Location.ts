@@ -12,6 +12,7 @@ export class Location {
     }
 
     move(direction: MoveDirection) {
+
         switch(direction){
             case MoveDirection.Up:
                 this.y--;
@@ -26,6 +27,11 @@ export class Location {
                 this.x++;
                 break;
         }
+
+    }
+
+    checkIfIsOutOfTheBorder(mapMaxX, mapMaxY) {
+        return this.x > mapMaxX && this.y > mapMaxY && this.x < 0 && this.y < 0;
     }
 
     moveBackwards(direction: MoveDirection) {

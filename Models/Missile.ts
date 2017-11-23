@@ -35,7 +35,13 @@ export default class Missile {
     shouldExplode(state: State) {
 
         //todo : Check the if isTHeFastMissileMode on or off !
+        //...
+
         this.Location.move(this.MoveDirection);
+
+        if(this.Location.checkIfIsOutOfTheBorder(state.MapWidth, state.MapHeight))
+            return true;
+
         let shouldMissileExplode = this.shouldLocationCauseExplosion(state);
         this.Location.moveBackwards(this.MoveDirection);
 

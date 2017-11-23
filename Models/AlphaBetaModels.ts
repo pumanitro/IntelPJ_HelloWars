@@ -10,6 +10,8 @@ export class State {
     OpponentLocations: Array<Location>;
     Bombs: Array<Bomb>;
     Missiles: Array<Missile>;
+    MapWidth: number;
+    MapHeight: number;
 
     constructor(battleFieldInfo: BattleFieldInfo) {
         this.Board = battleFieldInfo.Board;
@@ -17,6 +19,8 @@ export class State {
         this.OpponentLocations = battleFieldInfo.OpponentLocations;
         this.Bombs = battleFieldInfo.Bombs;
         this.Missiles = battleFieldInfo.Missiles;
+        this.MapWidth = battleFieldInfo.GameConfig.MapWidth;
+        this.MapHeight = battleFieldInfo.GameConfig.MapHeight;
     }
 
 }
