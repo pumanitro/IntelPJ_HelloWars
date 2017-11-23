@@ -1,7 +1,7 @@
 import {BattleFieldInfo, BoardTile} from "./GameModels";
 import {Location} from "./Location";
-import Bomb from './Bomb';
-import Missile from './Missile';
+import Bomb from './Explodable/Bomb/Bomb';
+import Missile from './Explodable/Missile/Missile';
 
 export class State {
 

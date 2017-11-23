@@ -1,7 +1,8 @@
-import {MoveDirection} from "./GameModels";
-import {Location} from "./Location";
-import {State} from "./AlphaBetaModels";
-import {BoardTile} from "./GameModels";
+import {MoveDirection} from "../../GameModels";
+import {Location} from "../../Location";
+import {State} from "../../AlphaBetaModels";
+import {BoardTile} from "../../GameModels";
+import {Explodable} from "../Explodable";
 
 export function isSomeBombOnLocation(location: Location, state: State) {
     return state.Bombs.some((bomb) => { return (bomb.Location.x === location.x && bomb.Location.y === location.y)});
@@ -11,16 +12,14 @@ export function isSomeMissileOnLocation(location: Location, state: State) {
     return state.Missiles.some((missile) => { return (missile.Location.x === location.x && missile.Location.y === location.y)});
 }
 
-export default class Missile {
+export default class Missile extends Explodable {
 
     MoveDirection: MoveDirection;
-    Location: Location;
-    ExplosionRadius: number;
 
     constructor( MoveDirection: MoveDirection, Location: Location, ExplosionRadius: number ) {
+        super(ExplosionRadius, Location);
+
         this.MoveDirection = MoveDirection;
-        this.Location = Location;
-        this.ExplosionRadius = ExplosionRadius;
     }
 
     shouldLocationCauseExplosion(state: State) {

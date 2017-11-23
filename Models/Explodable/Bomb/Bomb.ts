@@ -1,19 +1,20 @@
-import {Location} from "./Location";
+import {Location} from "../../Location";
+import {Explodable} from "../Explodable";
 
-export default class Bomb {
+export default class Bomb extends Explodable {
 
     RoundsUntilExplodes: number;
-    Location: Location;
-    ExplosionRadius: number;
 
     constructor( RoundsUntilExplodes: number, Location: Location, ExplosionRadius: number ) {
+        super(ExplosionRadius, Location);
+
         this.RoundsUntilExplodes = RoundsUntilExplodes;
-        this.Location = Location;
-        this.ExplosionRadius = ExplosionRadius;
     }
 
     shouldExplode(): boolean {
         return this.RoundsUntilExplodes === 0;
     }
+
+
 
 }

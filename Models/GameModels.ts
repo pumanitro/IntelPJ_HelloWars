@@ -1,5 +1,5 @@
-import Bomb from './Bomb';
-import Missile from './Missile';
+import Bomb from './Explodable/Bomb/Bomb';
+import Missile from './Explodable/Missile/Missile';
 import {Location} from "./Location";
 
 export enum BoardTile {

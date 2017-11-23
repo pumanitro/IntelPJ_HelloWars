@@ -1,9 +1,9 @@
 import {isSomeBombOnLocation, default as Missile, isSomeMissileOnLocation} from "./Missile";
-import {BoardTile, MoveDirection} from "./GameModels";
-import {Location} from "./Location";
-import Bomb from "./Bomb";
-import {State} from "./AlphaBetaModels";
-import {MockedBattleFieldInfo} from "./MockState";
+import {BoardTile, MoveDirection} from "../../GameModels";
+import {Location} from "../../Location";
+import Bomb from "../Bomb/Bomb";
+import {State} from "../../AlphaBetaModels";
+import {MockedBattleFieldInfo} from "../../MockState";
 
 let mockState  = new State(MockedBattleFieldInfo);
 
