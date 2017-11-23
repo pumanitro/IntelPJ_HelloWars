@@ -27,4 +27,21 @@ export class Location {
                 break;
         }
     }
+
+    moveBackwards(direction: MoveDirection) {
+        switch(direction){
+            case MoveDirection.Up:
+                this.y++;
+                break;
+            case MoveDirection.Down:
+                this.y--;
+                break;
+            case MoveDirection.Left:
+                this.x++;
+                break;
+            case MoveDirection.Right:
+                this.x--;
+                break;
+        }
+    }
 }

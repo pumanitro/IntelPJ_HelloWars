@@ -23,15 +23,19 @@ export default class Missile {
         this.ExplosionRadius = ExplosionRadius;
     }
 
-    shouldLocationCauseExplosion(location: Location, state: State) {
+    shouldLocationCauseExplosion(state: State) {
 
-        let isBombOnTheWay = isSomeBombOnLocation(location, state);
-        let isMissileOnTheWay = isSomeMissileOnLocation(location, state);
+        let isBombOnTheWay = isSomeBombOnLocation(this.Location, state);
+        let isMissileOnTheWay = isSomeMissileOnLocation(this.Location, state);
 
-        return state.Board[location.x][location.y] === BoardTile.Empty && !isBombOnTheWay && !isMissileOnTheWay;
+        return state.Board[this.Location.x][this.Location.y] === BoardTile.Empty && !isBombOnTheWay && !isMissileOnTheWay;
     }
 
-    shouldExplode() {
+    shouldExplode(state: State) {
+
+        this.Location.move(this.MoveDirection);
+        this.shouldExplode(state);
+        this.Location.moveBackwards(this.MoveDirection);
 
     }
 
