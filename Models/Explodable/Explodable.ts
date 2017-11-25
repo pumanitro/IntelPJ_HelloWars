@@ -13,9 +13,9 @@ export class Explodable {
 
     explode(state: State) {
 
-        let affectedArray = new Set();
+        let affectedArray = [];
 
-        affectedArray.add(this.Location);
+        affectedArray.push(this.Location);
 
         let locationWithoutChanges = {
             x: this.Location.x,
@@ -27,7 +27,7 @@ export class Explodable {
                 //if not stop
 
                 this.Location.move(direction);
-                affectedArray.add(new Location(`${this.Location.x}, ${this.Location.y}`));
+                affectedArray.push(new Location(`${this.Location.x}, ${this.Location.y}`));
             }
             this.Location.x = locationWithoutChanges.x;
             this.Location.y = locationWithoutChanges.y;
