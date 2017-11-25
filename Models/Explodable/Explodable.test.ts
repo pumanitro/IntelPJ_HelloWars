@@ -42,7 +42,7 @@ describe('explode', () => {
 
     it('should return array of affected location for 2 range Bomb with clear surroundings and dont show exploded fields when they are out of board', () => {
 
-        let explodable = new Explodable(1, new Location("2, 1"));
+        let explodable = new Explodable(2, new Location("2, 1"));
 
         let expectedOutput = [];
 
@@ -59,6 +59,9 @@ describe('explode', () => {
         mockState.Board[1][2] = BoardTile.Empty;
 
         let explodedFields = explodable.explode(mockState);
+
+        console.log(expectedOutput);
+        console.log(explodedFields);
 
         //Checking existance of the elements:
         expectedOutput.forEach(location => {

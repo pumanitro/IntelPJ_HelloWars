@@ -41,8 +41,8 @@ let sampleGameData = {
         }
     ],
     "GameConfig": {
-        "MapWidth": 20,
-        "MapHeight": 20,
+        "MapWidth": 3,
+        "MapHeight": 3,
         "BombBlastRadius": 2,
         "MissileBlastRadius": 2,
         "RoundsBetweenMissiles": 5,
