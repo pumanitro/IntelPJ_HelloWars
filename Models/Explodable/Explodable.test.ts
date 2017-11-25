@@ -24,7 +24,15 @@ describe('explode', () => {
         mockState.Board[2][1] = BoardTile.Empty;
         mockState.Board[1][2] = BoardTile.Empty;
 
-        expect(explodable.explode(mockState)).toBe(expectedOutput);
+        let explodedFields = explodable.explode(mockState);
+
+        for(let location of expectedOutput) {
+            expect(explodedFields.has(location)).toBe(true);
+        }
+
+        console.log(expectedOutput);
+        console.log(explodedFields);
+
     });
 
 
