@@ -1,7 +1,7 @@
 import {isSomeBombOnLocation, default as Missile, isSomeMissileOnLocation} from "./Missile";
 import {BoardTile, MoveDirection} from "../../GameModels";
 import {Location} from "../../Location";
-import Bomb from "../Bomb/Bomb";
+import {Bomb} from "../Bomb/Bomb";
 import {State} from "../../AlphaBetaModels";
 import {MockedBattleFieldInfo} from "../../MockState";
 
@@ -70,7 +70,7 @@ describe('shouldExplode', () => {
         expect(missile.shouldExplode(mockState)).toBe(false);
     });
 
-    it('return true is there is some obstacle on the way (bomb or another missile)', () => {
+    it('return true if there is some obstacle on the way (bomb or another missile)', () => {
         mockState.Bombs.push(new Bomb(1, new Location("1, 0"), 1));
         mockState.Missiles = [];
 

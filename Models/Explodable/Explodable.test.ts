@@ -7,7 +7,7 @@ let mockState = MockedGameState;
 
 describe('explode', () => {
 
-    it('should return Set of affected location for 1 range Bomb with clear surroundings', () => {
+    it('should return array of affected location for 1 range Bomb with clear surroundings', () => {
 
         let explodable = new Explodable(1, new Location("1, 1"));
 
@@ -40,7 +40,7 @@ describe('explode', () => {
 
     });
 
-    it('should return Set of affected location for 2 range Bomb with clear surroundings and dont show exploded fields when they are out of board', () => {
+    it('should return array of affected location for 2 range Bomb with clear surroundings and dont show exploded fields when they are out of board', () => {
 
         let explodable = new Explodable(1, new Location("2, 1"));
 
