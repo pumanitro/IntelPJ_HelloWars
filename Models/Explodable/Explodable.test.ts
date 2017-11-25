@@ -7,6 +7,21 @@ let mockState = MockedGameState;
 
 describe('explode', () => {
 
+    function compareExplodedStates(explodable, expectedOutput, mockState) {
+        let explodedFields: Array<Location> = explodable.explode(mockState);
+
+        //Checking existance of the elements:
+        expectedOutput.forEach(location => {
+            let theSameField = explodedFields.find(explodedField => {
+                return location.x === explodedField.x && location.y === explodedField.y;
+            });
+            expect(theSameField !== undefined).toBe(true);
+        });
+
+        //Checking amount of elements:
+        expect(expectedOutput.length).toEqual(explodedFields.length);
+    }
+
     it('should return array of affected location for 1 range Bomb with clear surroundings', () => {
 
         let explodable = new Explodable(1, new Location("1, 1"));
@@ -60,9 +75,6 @@ describe('explode', () => {
 
         let explodedFields = explodable.explode(mockState);
 
-        console.log(expectedOutput);
-        console.log(explodedFields);
-
         //Checking existance of the elements:
         expectedOutput.forEach(location => {
             let theSameField = explodedFields.find(explodedField => {
@@ -88,7 +100,6 @@ describe('explode', () => {
         expectedOutput.push(new Location("2, 1"));
 
         expectedOutput.push(new Location("2, 0"));
-        expectedOutput.push(new Location("1, 1"));
         expectedOutput.push(new Location("2, 2"));
 
         mockState.Board[0][0] = BoardTile.Empty;
@@ -99,9 +110,6 @@ describe('explode', () => {
         mockState.Board[1][1] = BoardTile.Indestructible;
 
         let explodedFields = explodable.explode(mockState);
-
-        console.log(expectedOutput);
-        console.log(explodedFields);
 
         //Checking existance of the elements:
         expectedOutput.forEach(location => {

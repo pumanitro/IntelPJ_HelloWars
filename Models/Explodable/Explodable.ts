@@ -1,5 +1,6 @@
 import {State} from "../AlphaBetaModels";
 import {Location} from "../Location";
+import {BoardTile} from "../GameModels";
 
 export class Explodable {
 
@@ -24,12 +25,17 @@ export class Explodable {
 
         for(let direction = 0; direction <= 3; direction++) {
             for(let i = 1; i <= this.ExplosionRadius; i++) {
-                //if not stop
+
                 this.Location.move(direction);
 
+                // stop propagating of the explosion when
+                // outOfTheBorder
                 let isOutOfTheBorder = this.Location.checkIfIsOutOfTheBorder(state.MapWidth, state.MapHeight);
-
                 if(isOutOfTheBorder)
+                    break;
+
+                // blocked by tile
+                if(state.Board[this.Location.x][this.Location.y] !== BoardTile.Empty)
                     break;
 
                 affectedArray.push(new Location(`${this.Location.x}, ${this.Location.y}`));

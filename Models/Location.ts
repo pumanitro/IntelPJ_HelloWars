@@ -41,8 +41,6 @@ export class Location {
         let outOfTheMaxCorner = this.x >= mapMaxX || this.y >= mapMaxY;
         let outOfTheMinCorner = this.x < 0 || this.y < 0;
 
-        let testWAt = this.x > mapMaxX || this.y > mapMaxY || this.x < 0 || this.y < 0;
-
         return outOfTheMaxCorner || outOfTheMinCorner;
     }
 
