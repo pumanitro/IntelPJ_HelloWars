@@ -17,5 +17,8 @@ export class Explodable {
 
         affectedArray.add(this.Location);
 
+
+
+        return affectedArray;
     };
 }
