@@ -1,4 +1,4 @@
-import Bomb from './Explodable/Bomb/Bomb';
+import {Bomb} from './Explodable/Bomb/Bomb';
 import Missile from './Explodable/Missile/Missile';
 import {Location} from "./Location";
 

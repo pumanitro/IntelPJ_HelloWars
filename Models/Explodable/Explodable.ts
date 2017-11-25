@@ -13,8 +13,9 @@ export class Explodable {
 
     explode(state: State) {
 
+        let affectedArray = new Set();
 
+        affectedArray.add(this.Location);
 
-        return
     };
 }

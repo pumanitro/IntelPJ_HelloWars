@@ -1,7 +1,7 @@
 import {Location} from "../../Location";
 import {Explodable} from "../Explodable";
 
-export default class Bomb extends Explodable {
+export class Bomb extends Explodable {
 
     RoundsUntilExplodes: number;
 
