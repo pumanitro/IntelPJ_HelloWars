@@ -79,5 +79,44 @@ describe('explode', () => {
 
     });
 
+    it('should return array of affected location for 2 range Bomb with blocked surroundings', () => {
+
+        let explodable = new Explodable(2, new Location("2, 1"));
+
+        let expectedOutput = [];
+
+        expectedOutput.push(new Location("2, 1"));
+
+        expectedOutput.push(new Location("2, 0"));
+        expectedOutput.push(new Location("1, 1"));
+        expectedOutput.push(new Location("2, 2"));
+
+        mockState.Board[0][0] = BoardTile.Empty;
+        mockState.Board[1][0] = BoardTile.Empty;
+        mockState.Board[0][2] = BoardTile.Empty;
+        mockState.Board[1][2] = BoardTile.Empty;
+
+        mockState.Board[1][1] = BoardTile.Indestructible;
+
+        let explodedFields = explodable.explode(mockState);
+
+        console.log(expectedOutput);
+        console.log(explodedFields);
+
+        //Checking existance of the elements:
+        expectedOutput.forEach(location => {
+            let theSameField = explodedFields.find(explodedField => {
+                return location.x === explodedField.x && location.y === explodedField.y;
+            });
+            expect(theSameField !== undefined).toBe(true);
+        });
+
+        //Checking amount of elements:
+        expect(expectedOutput.length).toEqual(explodedFields.length);
+
+        console.log(expectedOutput);
+        console.log(explodedFields);
+
+    });
 
 });
