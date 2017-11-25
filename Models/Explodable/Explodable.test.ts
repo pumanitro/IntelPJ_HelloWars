@@ -21,8 +21,8 @@ describe('explode', () => {
         //Checking amount of elements:
         expect(expectedOutput.length).toEqual(explodedFields.length);
 
-        console.log(expectedOutput);
-        console.log(explodedFields);
+        /*console.log(expectedOutput);
+        console.log(explodedFields);*/
     }
 
     it('should return array of affected location for 1 range Bomb with clear surroundings', () => {
@@ -72,21 +72,21 @@ describe('explode', () => {
 
     it('should return array of affected location for 2 range Bomb with blocked surroundings', () => {
 
-        let explodable = new Explodable(2, new Location("2, 1"));
+        let explodable = new Explodable(2, new Location("1, 1"));
 
         let expectedOutput = [];
 
-        expectedOutput.push(new Location("2, 1"));
-
-        expectedOutput.push(new Location("2, 0"));
-        expectedOutput.push(new Location("2, 2"));
+        expectedOutput.push(new Location("1, 1"));
 
         mockState.Board[0][0] = BoardTile.Empty;
-        mockState.Board[1][0] = BoardTile.Empty;
+        mockState.Board[2][0] = BoardTile.Empty;
         mockState.Board[0][2] = BoardTile.Empty;
-        mockState.Board[1][2] = BoardTile.Empty;
+        mockState.Board[2][2] = BoardTile.Empty;
 
-        mockState.Board[1][1] = BoardTile.Indestructible;
+        mockState.Board[1][0] = BoardTile.Indestructible;
+        mockState.Board[0][1] = BoardTile.Fortified;
+        mockState.Board[1][2] = BoardTile.Regular;
+        mockState.Board[2][1] = BoardTile.Fortified;
 
         compareExplodedStates(explodable, expectedOutput, mockState);
 
