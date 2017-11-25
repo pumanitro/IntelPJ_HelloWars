@@ -20,6 +20,9 @@ describe('explode', () => {
 
         //Checking amount of elements:
         expect(expectedOutput.length).toEqual(explodedFields.length);
+
+        console.log(expectedOutput);
+        console.log(explodedFields);
     }
 
     it('should return array of affected location for 1 range Bomb with clear surroundings', () => {
@@ -40,18 +43,7 @@ describe('explode', () => {
         mockState.Board[2][1] = BoardTile.Empty;
         mockState.Board[1][2] = BoardTile.Empty;
 
-        let explodedFields: Array<Location> = explodable.explode(mockState);
-
-        //Checking existance of the elements:
-        expectedOutput.forEach(location => {
-            let theSameField = explodedFields.find(explodedField => {
-                return location.x === explodedField.x && location.y === explodedField.y;
-            });
-            expect(theSameField !== undefined).toBe(true);
-        });
-
-        //Checking amount of elements:
-        expect(expectedOutput.length).toEqual(explodedFields.length);
+        compareExplodedStates(explodable, expectedOutput, mockState);
 
     });
 
@@ -73,21 +65,8 @@ describe('explode', () => {
         mockState.Board[0][2] = BoardTile.Empty;
         mockState.Board[1][2] = BoardTile.Empty;
 
-        let explodedFields = explodable.explode(mockState);
+        compareExplodedStates(explodable, expectedOutput, mockState);
 
-        //Checking existance of the elements:
-        expectedOutput.forEach(location => {
-            let theSameField = explodedFields.find(explodedField => {
-                return location.x === explodedField.x && location.y === explodedField.y;
-            });
-            expect(theSameField !== undefined).toBe(true);
-        });
-
-        //Checking amount of elements:
-        expect(expectedOutput.length).toEqual(explodedFields.length);
-
-        console.log(expectedOutput);
-        console.log(explodedFields);
 
     });
 
@@ -109,21 +88,7 @@ describe('explode', () => {
 
         mockState.Board[1][1] = BoardTile.Indestructible;
 
-        let explodedFields = explodable.explode(mockState);
-
-        //Checking existance of the elements:
-        expectedOutput.forEach(location => {
-            let theSameField = explodedFields.find(explodedField => {
-                return location.x === explodedField.x && location.y === explodedField.y;
-            });
-            expect(theSameField !== undefined).toBe(true);
-        });
-
-        //Checking amount of elements:
-        expect(expectedOutput.length).toEqual(explodedFields.length);
-
-        console.log(expectedOutput);
-        console.log(explodedFields);
+        compareExplodedStates(explodable, expectedOutput, mockState);
 
     });
 
