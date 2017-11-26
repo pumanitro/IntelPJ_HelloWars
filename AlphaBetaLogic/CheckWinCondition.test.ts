@@ -1,5 +1,5 @@
 import {calcRecursivelyExplosionsArray} from './CheckWinCondition';
-import {MockedGameState} from "../Models/MockState";
+import {EmptyBoard, MockedGameState} from "../Models/MockState";
 import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import {Location} from "../Models/Location";
 import Missile from "../Models/Explodable/Missile/Missile";
@@ -18,6 +18,8 @@ describe('calcRecursivelyExplosionsArray', () => {
             new Missile(MoveDirection.Left, new Location("0, 2"), 1)
         ];
 
+        mockState.Board = EmptyBoard;
+
         let copyOfBombs = [];
         mockState.Bombs.forEach(bomb => {
             copyOfBombs.push(new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
@@ -33,7 +35,10 @@ describe('calcRecursivelyExplosionsArray', () => {
         let expectedArray = [
             '2, 0',
             '2, 1',
-            '1, 0'
+            '1, 0',
+            '0, 2',
+            '0, 1',
+            '1, 2'
         ];
 
         expect(calcRecursivelyExplosionsArray(mockState, copyOfBombs, copyOfMissiles,  explosionArray)).toEqual(expectedArray);

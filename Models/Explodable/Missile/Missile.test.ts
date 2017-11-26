@@ -89,4 +89,14 @@ describe('shouldExplode', () => {
 
         expect(missile.shouldExplode(mockState)).toBe(true);
     });
+
+    it('shouldnt change missile possition', () => {
+        missile.MoveDirection = MoveDirection.Left;
+        missile.Location = new Location('0, 2');
+
+        missile.shouldExplode(mockState);
+
+        expect(missile.Location.generateKey()).toBe('0, 2');
+    });
+
 });
