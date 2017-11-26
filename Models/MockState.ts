@@ -59,3 +59,14 @@ export let EmptyBoard = [
     [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
     [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty]
 ];
+
+export let BigEmptyBoard = [
+
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty, BoardTile.Empty]
+];

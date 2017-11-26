@@ -1,5 +1,5 @@
-import {calcRecursivelyExplosionsArray} from './CheckWinCondition';
-import {EmptyBoard, MockedGameState} from "../Models/MockState";
+import {calcRecursivelyExplosionsArray, firstExplosion} from './CheckWinCondition';
+import {BigEmptyBoard, EmptyBoard, MockedGameState} from "../Models/MockState";
 import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import {Location} from "../Models/Location";
 import Missile from "../Models/Explodable/Missile/Missile";
@@ -7,7 +7,7 @@ import {MoveDirection} from "../Models/GameModels";
 
 let mockState = MockedGameState;
 
-describe('calcRecursivelyExplosionsArray', () => {
+describe('firstExplosion', () => {
     it('should return array of explosions after chain reaction.', () => {
 
         mockState.Bombs = [
@@ -30,8 +30,6 @@ describe('calcRecursivelyExplosionsArray', () => {
             copyOfMissiles.push(new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
         });
 
-        let explosionArray = [];
-
         let expectedArray = [
             '2, 0',
             '2, 1',
@@ -41,11 +39,53 @@ describe('calcRecursivelyExplosionsArray', () => {
             '1, 2'
         ];
 
-        expect(calcRecursivelyExplosionsArray(mockState, copyOfBombs, copyOfMissiles,  explosionArray)).toEqual(expectedArray);
+        expect(firstExplosion(mockState, copyOfBombs, copyOfMissiles)).toEqual(expectedArray);
 
     });
 
     it('should return array of explosions without the same Locations', () => {
+
+        mockState.Bombs = [
+            new Bomb(0, new Location("0, 0"), 1),
+            new Bomb(1, new Location("4, 5"), 2),
+            new Bomb(0, new Location("5, 5"), 1)
+        ];
+
+        mockState.Missiles = [
+            new Missile(MoveDirection.Left, new Location("4, 3"), 1)
+        ];
+
+        mockState.Board = BigEmptyBoard;
+
+        mockState.MapHeight = 6;
+        mockState.MapWidth = 6;
+
+        let coppyOfBombs = [];
+        mockState.Bombs.forEach(bomb => {
+            coppyOfBombs.push(new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
+        });
+
+        let coppyOfMissiles = [];
+        mockState.Missiles.forEach(missile => {
+            coppyOfBombs.push(new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
+        });
+
+        let explosionArray = firstExplosion(mockState, coppyOfBombs, coppyOfMissiles);
+
+        calcRecursivelyExplosionsArray(mockState, coppyOfBombs, coppyOfMissiles, explosionArray);
+
+        let expectedArray = [
+            '0, 0',
+            '0, 1',
+            '1, 0',
+            '5, 5',
+            '5, 4',
+            '4, 5',
+            '4, 4'
+            //...
+        ];
+
+        expect(explosionArray).toEqual(expectedArray);
 
     });
 });
