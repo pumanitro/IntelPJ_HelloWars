@@ -14,9 +14,9 @@ export class Explodable {
 
     explode(state: State) {
 
-        let AffectedSet = new Set();
+        let affectedArray = [];
 
-        AffectedSet.add(this.Location.generateKey());
+        affectedArray.push(this.Location.generateKey());
 
         let locationWithoutChanges = {
             x: this.Location.x,
@@ -38,12 +38,12 @@ export class Explodable {
                 if(state.Board[this.Location.x][this.Location.y] !== BoardTile.Empty)
                     break;
 
-                AffectedSet.add(this.Location.generateKey());
+                affectedArray.push(this.Location.generateKey());
             }
             this.Location.x = locationWithoutChanges.x;
             this.Location.y = locationWithoutChanges.y;
         }
 
-        return AffectedSet;
+        return affectedArray;
     };
 }

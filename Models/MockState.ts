@@ -1,4 +1,4 @@
-import {BattleFieldInfo} from "./GameModels";
+import {BattleFieldInfo, BoardTile} from "./GameModels";
 import {State} from "./AlphaBetaModels";
 
 let sampleGameData = {
@@ -53,3 +53,9 @@ let sampleGameData = {
 
 export let MockedBattleFieldInfo = new BattleFieldInfo(sampleGameData);
 export let MockedGameState = new State(MockedBattleFieldInfo);
+
+export let EmptyBoard = [
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty],
+    [BoardTile.Empty, BoardTile.Empty, BoardTile.Empty]
+];

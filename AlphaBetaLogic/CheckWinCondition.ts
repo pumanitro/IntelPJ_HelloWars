@@ -4,32 +4,36 @@ import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import Missile from "../Models/Explodable/Missile/Missile";
 
 // A. Preparing explosion map.
-export function calcRecursivelyExplosionsArray(state: State, actualBombs: Set<Bomb>, actualMissiles: Set<Missile>, explosionsArray: Array<Location>) {
-    for(let bomb of actualBombs) {
-        if(bomb.shouldExplode()) {
-            explosionsArray.concat(bomb.explode(state));
-        }
-    }
+export function calcRecursivelyExplosionsArray(state: State, actualBombs: Array<Bomb>, actualMissiles: Array<Missile>, explosionsArray: Array<String>) {
 
-    for(let missile of actualMissiles) {
-        if(missile.shouldExplode(state)) {
-            explosionsArray.concat(missile.explode(state));
+    actualBombs.forEach((bomb, index) => {
+        if(bomb.shouldExplode()) {
+            explosionsArray = [...explosionsArray, ...bomb.explode(state)];
+            actualBombs.splice(index, 1);
         }
-    }
+    });
+
+    actualMissiles.forEach((missile, index) => {
+        if(missile.shouldExplode(state)) {
+            explosionsArray = [...explosionsArray, ...missile.explode(state)];
+            actualBombs.splice(index, 1);
+        }
+    });
 
     // After whole recurencion Get rid of repiting Location :
+    return explosionsArray;
 }
 
 export default function checkWinConditionsFunction(actualState: State ) {
 
-    let coppyOfBombs = new Set();
+    let coppyOfBombs = [];
     actualState.Bombs.forEach(bomb => {
-        coppyOfBombs.add(bomb.Location.generateKey(), new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
+        coppyOfBombs.push(new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
     });
 
-    let coppyOfMissiles = new Set();
+    let coppyOfMissiles = [];
     actualState.Missiles.forEach(missile => {
-        coppyOfBombs.add(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
+        coppyOfBombs.push(new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
     });
 
     let explosionArray = [];
