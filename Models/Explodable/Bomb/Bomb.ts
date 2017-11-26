@@ -15,6 +15,4 @@ export class Bomb extends Explodable {
         return this.RoundsUntilExplodes === 0;
     }
 
-
-
 }

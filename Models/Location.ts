@@ -11,6 +11,10 @@ export class Location {
         this.y = Number(splitLocation[1]);
     }
 
+    generateKey() {
+        return `${this.x}, ${this.y}`;
+    }
+
     move(direction: MoveDirection) {
 
         switch(direction){
