@@ -19,17 +19,17 @@ describe('calcRecursivelyExplosionsArray', () => {
             new Missile(MoveDirection.Left, new Location("0, 2"), 1)
         ];
 
-        let copyOfBombs = new Set();
+        let copyOfBombs = new Map();
         mockState.Bombs.forEach(bomb => {
-            copyOfBombs.add(bomb.Location.generateKey(), new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
+            copyOfBombs.set(bomb.Location.generateKey(), new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
         });
 
-        let copyOfMissiles = new Set();
+        let copyOfMissiles = new Map();
         mockState.Missiles.forEach(missile => {
-            copyOfMissiles.add(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
+            copyOfMissiles.set(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
         });
 
-        let explosionArray = [];
+        let explosionArray = new Set();
         calcRecursivelyExplosionsArray(mockState, copyOfBombs, copyOfMissiles,  explosionArray);
 
         expect(explosionArray).toEqual([

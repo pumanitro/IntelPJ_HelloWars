@@ -4,22 +4,21 @@ import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import Missile from "../Models/Explodable/Missile/Missile";
 
 // A. Preparing explosion map.
-export function calcRecursivelyExplosionsArray(state: State, actualBombs: Map<String, Bomb>, actualMissiles: Map<String, Missile>, explosionsArray: Array<Location>) {
-    for(let bomb of actualBombs) {
+export function calcRecursivelyExplosionsArray(state: State, actualBombs: Map<String, Bomb>, actualMissiles: Map<String, Missile>, explosionsSet: Set<String>) {
+    for(let bomb of actualBombs.values()) {
         if(bomb.shouldExplode()) {
-            explosionsArray.concat(bomb.explode(state));
+            explosionsSet = new Set([...explosionsSet, ...bomb.explode(state)]);
             actualBombs.delete(bomb.Location.generateKey());
         }
     }
 
-    for(let missile of actualMissiles) {
+    for(let missile of actualMissiles.values()) {
         if(missile.shouldExplode(state)) {
-            explosionsArray.concat(missile.explode(state));
-            actualBombs.delete(missile.Location.generateKey());
+            explosionsSet = new Set([...explosionsSet, ...missile.explode(state)]);
+            actualMissiles.delete(missile.Location.generateKey());
         }
     }
 
-    // After whole recurencion Get rid of repiting Location :
 }
 
 export default function checkWinConditionsFunction(actualState: State ) {
@@ -34,7 +33,7 @@ export default function checkWinConditionsFunction(actualState: State ) {
         coppyOfBombs.set(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
     });
 
-    let explosionArray = [];
+    let explosionArray = new Set();
 
     calcRecursivelyExplosionsArray(actualState, coppyOfBombs, coppyOfMissiles,  explosionArray);
 
