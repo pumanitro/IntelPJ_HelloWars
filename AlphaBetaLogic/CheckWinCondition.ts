@@ -4,7 +4,7 @@ import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import Missile from "../Models/Explodable/Missile/Missile";
 
 // A. Preparing explosion map.
-export function calcRecursivelyExplosionsArray(state: State, actualBombs: Set<Bomb>, actualMissiles: Set<Missile>, explosionsArray: Array<Location>) {
+export function calcRecursivelyExplosionsArray(state: State, actualBombs: Map<String, Bomb>, actualMissiles: Map<String, Missile>, explosionsArray: Array<Location>) {
     for(let bomb of actualBombs) {
         if(bomb.shouldExplode()) {
             explosionsArray.concat(bomb.explode(state));
@@ -24,14 +24,14 @@ export function calcRecursivelyExplosionsArray(state: State, actualBombs: Set<Bo
 
 export default function checkWinConditionsFunction(actualState: State ) {
 
-    let coppyOfBombs = new Set();
+    let coppyOfBombs = new Map();
     actualState.Bombs.forEach(bomb => {
-        coppyOfBombs.add(bomb.Location.generateKey(), new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
+        coppyOfBombs.set(bomb.Location.generateKey(), new Bomb(bomb.RoundsUntilExplodes, new Location(bomb.Location.generateKey()), bomb.ExplosionRadius));
     });
 
-    let coppyOfMissiles = new Set();
+    let coppyOfMissiles = new Map();
     actualState.Missiles.forEach(missile => {
-        coppyOfBombs.add(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
+        coppyOfBombs.set(missile.Location.generateKey(), new Missile(missile.MoveDirection, new Location(missile.Location.generateKey()), missile.ExplosionRadius));
     });
 
     let explosionArray = [];
