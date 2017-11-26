@@ -27,7 +27,8 @@ export function firstExplosion(state: State, actualBombs: Array<Bomb>, actualMis
 }
 
 function makeArrayUnique(array) {
-    return Array.from(new Set(array));
+    //return [...new Set(array)];
+    return array.filter(function(item, i, ar){ return ar.indexOf(item) === i; })
 }
 
 export function calcRecursivelyExplosionsArray(state: State, actualBombs: Array<Bomb>, actualMissiles: Array<Missile>, explosionArray: Array<String>) {
@@ -36,7 +37,7 @@ export function calcRecursivelyExplosionsArray(state: State, actualBombs: Array<
 
     actualBombs.forEach((bomb, index) => {
        if(explosionArray.some((value) => { return value === bomb.Location.generateKey(); })){
-           explosionArray.concat(bomb.explode(state));
+           explosionArray = [...explosionArray, ...bomb.explode(state)];
            actualBombs.splice(index, 1);
            explodableAmount++;
        }
@@ -44,19 +45,19 @@ export function calcRecursivelyExplosionsArray(state: State, actualBombs: Array<
 
     actualMissiles.forEach((missile, index) => {
         if (explosionArray.some(value => value === missile.Location.generateKey())) {
-            explosionArray.concat(missile.explode(state));
+            explosionArray = [...explosionArray, ...missile.explode(state)];
             actualMissiles.concat(missile.explode(state));
             explodableAmount++;
         }
     });
 
     //Check state repetitions:
-    makeArrayUnique(explosionArray);
+    let uniqueExplosionArray = makeArrayUnique(explosionArray);
 
     if(explodableAmount === 0)
-        return explosionArray;
+        return uniqueExplosionArray;
     else
-        calcRecursivelyExplosionsArray(state, actualBombs, actualMissiles, explosionArray);
+        return calcRecursivelyExplosionsArray(state, actualBombs, actualMissiles, uniqueExplosionArray);
 
 }
 

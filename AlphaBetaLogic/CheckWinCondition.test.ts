@@ -72,7 +72,7 @@ describe('firstExplosion', () => {
 
         let explosionArray = firstExplosion(mockState, coppyOfBombs, coppyOfMissiles);
 
-        calcRecursivelyExplosionsArray(mockState, coppyOfBombs, coppyOfMissiles, explosionArray);
+        let finalExplosionArray = calcRecursivelyExplosionsArray(mockState, coppyOfBombs, coppyOfMissiles, explosionArray);
 
         let expectedArray = [
             '0, 0',
@@ -81,11 +81,16 @@ describe('firstExplosion', () => {
             '5, 5',
             '5, 4',
             '4, 5',
-            '4, 4'
-            //...
+            '4, 4',
+            '4, 3',
+            '3, 5',
+            '2, 5',
+            '4, 2',
+            '5, 3',
+            '3, 3'
         ];
 
-        expect(explosionArray).toEqual(expectedArray);
+        expect(finalExplosionArray).toEqual(expectedArray);
 
     });
 });
