@@ -38,7 +38,7 @@ export default class Missile extends Explodable {
 
         this.Location.move(this.MoveDirection);
 
-        if(this.Location.checkIfIsOutOfTheBorder(state.MapWidth, state.MapHeight)){
+        if(this.Location.checkIfIsOutOfTheBorder(state.GameConfig.MapWidth, state.GameConfig.MapHeight)){
             this.Location.moveBackwards(this.MoveDirection);
             return true;
         }

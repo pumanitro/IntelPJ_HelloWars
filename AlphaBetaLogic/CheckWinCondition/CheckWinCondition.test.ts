@@ -60,8 +60,8 @@ describe('firstExplosion', () => {
 
         mockState.Board = BigEmptyBoard;
 
-        mockState.MapHeight = 6;
-        mockState.MapWidth = 6;
+        mockState.GameConfig.MapHeight = 6;
+        mockState.GameConfig.MapWidth = 6;
 
         let coppyOfBombs = [];
         mockState.Bombs.forEach(bomb => {
@@ -95,8 +95,8 @@ describe('firstExplosion', () => {
 
         expect(finalExplosionArray).toEqual(expectedArray);
 
-        mockState.MapHeight = 3;
-        mockState.MapWidth = 3;
+        mockState.GameConfig.MapHeight = 3;
+        mockState.GameConfig.MapWidth = 3;
 
     });
 });

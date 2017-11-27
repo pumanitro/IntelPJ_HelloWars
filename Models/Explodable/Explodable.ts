@@ -30,7 +30,7 @@ export class Explodable {
 
                 // stop propagating of the explosion when
                 // outOfTheBorder
-                let isOutOfTheBorder = this.Location.checkIfIsOutOfTheBorder(state.MapWidth, state.MapHeight);
+                let isOutOfTheBorder = this.Location.checkIfIsOutOfTheBorder(state.GameConfig.MapWidth, state.GameConfig.MapHeight);
                 if(isOutOfTheBorder)
                     break;
 

@@ -1,4 +1,5 @@
 import {State} from "../../Models/AlphaBetaModels";
+import {BattleFieldInfo} from "../../Models/GameModels";
 
 export function generateMoves(actualState: State) {
     let nextPossibleStates = [];
@@ -25,6 +26,10 @@ export function generateMoves(actualState: State) {
                 bomb.tick();
             }
         });
+    }
+
+    for(let direction = 0; direction <= 3; direction++) {
+
     }
 
     return nextPossibleStates

@@ -10,22 +10,27 @@ export class State {
     OpponentLocations: Array<Location>;
     Bombs: Array<Bomb>;
     Missiles: Array<Missile>;
-    MapWidth: number;
-    MapHeight: number;
+    GameConfig: {
+        MapWidth: number,
+        MapHeight: number,
+    };
     isFirstPlayerTurn: boolean;
     shouldTick: boolean;
 
-    constructor(battleFieldInfo: BattleFieldInfo) {
+    constructor(battleFieldInfo: BattleFieldInfo | State, isFirstPlayerTurn = true, shouldTick = false) {
         this.Board = battleFieldInfo.Board;
         this.BotLocation = battleFieldInfo.BotLocation;
         this.OpponentLocations = battleFieldInfo.OpponentLocations;
         this.Bombs = battleFieldInfo.Bombs;
         this.Missiles = battleFieldInfo.Missiles;
-        this.MapWidth = battleFieldInfo.GameConfig.MapWidth;
-        this.MapHeight = battleFieldInfo.GameConfig.MapHeight;
 
-        this.isFirstPlayerTurn = true;
-        this.shouldTick = false;
+        this.GameConfig = {
+            MapWidth: battleFieldInfo.GameConfig.MapWidth,
+            MapHeight: battleFieldInfo.GameConfig.MapHeight
+        };
+
+        this.isFirstPlayerTurn = isFirstPlayerTurn;
+        this.shouldTick = shouldTick;
     }
 
 }
