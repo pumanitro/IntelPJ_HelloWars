@@ -1,9 +1,12 @@
-import {calcRecursivelyExplosionsArray, firstExplosion} from './CheckWinCondition';
+import {
+    calcRecursivelyExplosionsArray, default as checkWinConditionsFunction,
+    firstExplosion
+} from './CheckWinCondition';
 import {BigEmptyBoard, EmptyBoard, MockedGameState} from "../Models/MockState";
 import {Bomb} from "../Models/Explodable/Bomb/Bomb";
 import {Location} from "../Models/Location";
 import Missile from "../Models/Explodable/Missile/Missile";
-import {MoveDirection} from "../Models/GameModels";
+import {BoardTile, MoveDirection} from "../Models/GameModels";
 
 let mockState = MockedGameState;
 
@@ -91,6 +94,58 @@ describe('firstExplosion', () => {
         ];
 
         expect(finalExplosionArray).toEqual(expectedArray);
+
+    });
+});
+
+describe('checkWinConditionsFunction', () => {
+   it('should return true if last opponent is on the explosionField', () => {
+       mockState.Board = EmptyBoard;
+
+       mockState.BotLocation = new Location("0, 2");
+       mockState.OpponentLocations = [new Location("2, 0")];
+
+       mockState.Bombs = [
+           new Bomb(0, new Location("1, 1"), 1),
+           new Bomb(1, new Location("1, 0"), 1)
+       ];
+
+       mockState.Missiles = [];
+
+       expect(checkWinConditionsFunction(mockState)).toBe(true);
+
+   });
+
+    it('should return false if last opponent is not on the explosionField, behind the wall', () => {
+        mockState.Board = EmptyBoard;
+        mockState.Board[2][1] = BoardTile.Fortified;
+
+        mockState.BotLocation = new Location("0, 1");
+        mockState.OpponentLocations = [new Location("2, 0")];
+
+        mockState.Bombs = [
+            new Bomb(0, new Location("2, 2"), 2)
+        ];
+
+        mockState.Missiles = [];
+
+        expect(checkWinConditionsFunction(mockState)).toBe(false);
+
+    });
+
+    it('should return false if last opponent and Bot is on the explosionField.', () => {
+        mockState.Board = EmptyBoard;
+
+        mockState.BotLocation = new Location("0, 2");
+        mockState.OpponentLocations = [new Location("2, 0")];
+
+        mockState.Bombs = [
+            new Bomb(0, new Location("2, 2"), 2)
+        ];
+
+        mockState.Missiles = [];
+
+        expect(checkWinConditionsFunction(mockState)).toBe(false);
 
     });
 });
