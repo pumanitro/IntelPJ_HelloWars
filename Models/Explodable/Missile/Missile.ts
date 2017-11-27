@@ -51,4 +51,8 @@ export default class Missile extends Explodable {
 
     }
 
+    tick() {
+        this.Location.move(this.MoveDirection);
+    }
+
 }

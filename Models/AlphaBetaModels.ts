@@ -12,6 +12,8 @@ export class State {
     Missiles: Array<Missile>;
     MapWidth: number;
     MapHeight: number;
+    isFirstPlayerTurn: boolean;
+    shouldTick: boolean;
 
     constructor(battleFieldInfo: BattleFieldInfo) {
         this.Board = battleFieldInfo.Board;
@@ -21,6 +23,9 @@ export class State {
         this.Missiles = battleFieldInfo.Missiles;
         this.MapWidth = battleFieldInfo.GameConfig.MapWidth;
         this.MapHeight = battleFieldInfo.GameConfig.MapHeight;
+
+        this.isFirstPlayerTurn = true;
+        this.shouldTick = false;
     }
 
 }

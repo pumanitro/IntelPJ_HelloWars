@@ -44,7 +44,7 @@ export class BattleFieldInfo {
         this.BotId = notPreparedBattleFieldInfo.BotId;
         this.Board = notPreparedBattleFieldInfo.Board;
         this.BotLocation = new Location(notPreparedBattleFieldInfo.BotLocation);
-        this.IsMissileAvailable = notPreparedBattleFieldInfo.IsMissileAvailableln;
+        this.IsMissileAvailable = notPreparedBattleFieldInfo.MissileAvailableIn;
 
         this.OpponentLocations = notPreparedBattleFieldInfo.OpponentLocations.map(location => new Location(location));
 
