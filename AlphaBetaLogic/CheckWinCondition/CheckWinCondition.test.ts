@@ -2,11 +2,11 @@ import {
     calcRecursivelyExplosionsArray, default as checkWinConditionsFunction,
     firstExplosion
 } from './CheckWinCondition';
-import {BigEmptyBoard, EmptyBoard, MockedGameState} from "../Models/MockState";
-import {Bomb} from "../Models/Explodable/Bomb/Bomb";
-import {Location} from "../Models/Location";
-import Missile from "../Models/Explodable/Missile/Missile";
-import {BoardTile, MoveDirection} from "../Models/GameModels";
+import {BigEmptyBoard, EmptyBoard, MockedGameState} from "../../Models/MockState";
+import {Bomb} from "../../Models/Explodable/Bomb/Bomb";
+import {Location} from "../../Models/Location";
+import Missile from "../../Models/Explodable/Missile/Missile";
+import {BoardTile, MoveDirection} from "../../Models/GameModels";
 
 let mockState = MockedGameState;
 
@@ -94,6 +94,9 @@ describe('firstExplosion', () => {
         ];
 
         expect(finalExplosionArray).toEqual(expectedArray);
+
+        mockState.MapHeight = 3;
+        mockState.MapWidth = 3;
 
     });
 });

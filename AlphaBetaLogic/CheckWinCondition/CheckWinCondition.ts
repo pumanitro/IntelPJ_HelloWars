@@ -1,7 +1,7 @@
-import {State} from "../Models/AlphaBetaModels";
-import {Location} from "../Models/Location";
-import {Bomb} from "../Models/Explodable/Bomb/Bomb";
-import Missile from "../Models/Explodable/Missile/Missile";
+import {State} from "../../Models/AlphaBetaModels";
+import {Location} from "../../Models/Location";
+import {Bomb} from "../../Models/Explodable/Bomb/Bomb";
+import Missile from "../../Models/Explodable/Missile/Missile";
 
 // A. Preparing explosion map.
 export function firstExplosion(state: State, actualBombs: Array<Bomb>, actualMissiles: Array<Missile>) {
