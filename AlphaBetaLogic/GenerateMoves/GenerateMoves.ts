@@ -1,5 +1,6 @@
 import {State} from "../../Models/AlphaBetaModels";
-import {BattleFieldInfo} from "../../Models/GameModels";
+import {BattleFieldInfo, BoardTile} from "../../Models/GameModels";
+import {Location} from "../../Models/Location";
 
 export function generateMoves(actualState: State) {
     let nextPossibleStates = [];
@@ -26,11 +27,29 @@ export function generateMoves(actualState: State) {
                 bomb.tick();
             }
         });
+
+        // Todo: change BoardTile type after explosions.
     }
 
     for(let direction = 0; direction <= 3; direction++) {
+        let copyOfState = new State(actualState);
+
+        let tempLocation = new Location(copyOfState.BotLocation.generateKey());
+        tempLocation.move(direction);
+
+        if(copyOfState.Board[tempLocation.x][tempLocation.y] === BoardTile.Empty){
+            copyOfState.BotLocation.move(direction);
+            copyOfState.isFirstPlayerTurn = !copyOfState.isFirstPlayerTurn;
+
+            if(copyOfState.shouldTick === false && !copyOfState.isFirstPlayerTurn)
+                copyOfState.shouldTick = true;
+
+            nextPossibleStates.push(copyOfState);
+
+        }
 
     }
 
-    return nextPossibleStates
+
+    return nextPossibleStates;
 }
