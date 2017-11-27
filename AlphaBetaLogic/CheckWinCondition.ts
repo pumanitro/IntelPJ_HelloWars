@@ -75,6 +75,11 @@ export default function checkWinConditionsFunction(actualState: State ) {
 
     let explosionArray = firstExplosion(actualState, coppyOfBombs, coppyOfMissiles);
 
-    calcRecursivelyExplosionsArray(actualState, coppyOfBombs, coppyOfMissiles, explosionArray);
+    let finalExplosionArray = calcRecursivelyExplosionsArray(actualState, coppyOfBombs, coppyOfMissiles, explosionArray);
+
+    let isOpponentOnTheExplosion = finalExplosionArray.some(value => actualState.OpponentLocations[0].generateKey() === value );
+    let isBotOnTheExplosion = finalExplosionArray.some(value => actualState.BotLocation[0].generateKey() === value );
+
+    return actualState.OpponentLocations.length === 1 && isOpponentOnTheExplosion && !isBotOnTheExplosion;
 
 }
