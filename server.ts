@@ -1,5 +1,9 @@
 import {BattleFieldInfo} from "./Models/GameModels";
 import {State} from "./Models/AlphaBetaModels";
+import {scoreFunction} from "./AlphaBetaLogic/ScoreFunction/ScoreFunction";
+import checkWinConditionsFunction from "./AlphaBetaLogic/CheckWinCondition/CheckWinCondition";
+import {generateMovesFunction} from "./AlphaBetaLogic/GenerateMoves/GenerateMoves";
+import {uniqueKeyFunction} from "./AlphaBetaLogic/UniqueKey/UniqueKey";
 
 const express = require('express');
 const app = express();
@@ -31,7 +35,7 @@ app.post('/PerformNextMove', (req, res) => {
 
     let state = new State(battleFieldInfo);
 
-    /*const config = {
+    const config = {
         scoreFunction 		: scoreFunction,
         generateMoves		: generateMovesFunction,
         checkWinConditions 	: checkWinConditionsFunction,
@@ -40,18 +44,23 @@ app.post('/PerformNextMove', (req, res) => {
         depth 			: 1
     };
 
-    const alphabeta = AlphaBetaConstructor( config );*/
+    const alphabeta = AlphaBetaConstructor( config );
 
-    let direction = getRandomInt(0,3);
-    //let action = getRandomInt(0,1);
-    let action = getRandomInt(0,2);
-    //let action = getRandomInt(0,1) === 1 ? 2 : 0;
+    alphabeta.incrementDepthForMilliseconds( 1000 , (result) => {
 
-    res.send({
-        "Direction": direction,
-        "Action": action,
-        // "Action": getRandomInt(0,1) === 1 ? 2 : 0,
-        "FireDirection": 0
+        result.alphabeta.best();
+
+        let direction = getRandomInt(0,3);
+        //let action = getRandomInt(0,1);
+        let action = getRandomInt(0,2);
+        //let action = getRandomInt(0,1) === 1 ? 2 : 0;
+
+        res.send({
+            "Direction": direction,
+            "Action": action,
+            // "Action": getRandomInt(0,1) === 1 ? 2 : 0,
+            "FireDirection": 0
+        });
     });
 
 });

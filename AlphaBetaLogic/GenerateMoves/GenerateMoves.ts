@@ -2,7 +2,7 @@ import {State} from "../../Models/AlphaBetaModels";
 import {BattleFieldInfo, BoardTile} from "../../Models/GameModels";
 import {Location} from "../../Models/Location";
 
-export function generateMoves(actualState: State) {
+export function generateMovesFunction(actualState: State) {
     let nextPossibleStates = [];
 
     //forNow only moves :
