@@ -1,5 +1,5 @@
 import {State} from "../../Models/AlphaBetaModels";
-import {BattleFieldInfo, BoardTile} from "../../Models/GameModels";
+import {BoardTile} from "../../Models/GameModels";
 import {Location} from "../../Models/Location";
 
 export function generateMovesFunction(actualState: State) {
@@ -37,19 +37,23 @@ export function generateMovesFunction(actualState: State) {
         let tempLocation = new Location(copyOfState.BotLocation.generateKey());
         tempLocation.move(direction);
 
-        if(copyOfState.Board[tempLocation.x][tempLocation.y] === BoardTile.Empty){
+        let isOutOfTheBorder = tempLocation.checkIfIsOutOfTheBorder(actualState.GameConfig.MapWidth, actualState.GameConfig.MapHeight);
+
+        if(!isOutOfTheBorder && copyOfState.Board[tempLocation.x][tempLocation.y] === BoardTile.Empty){
             copyOfState.BotLocation.move(direction);
             copyOfState.isFirstPlayerTurn = !copyOfState.isFirstPlayerTurn;
 
             if(copyOfState.shouldTick === false && !copyOfState.isFirstPlayerTurn)
                 copyOfState.shouldTick = true;
 
+            if(copyOfState.firstMove === -1)
+                copyOfState.firstMove = direction;
+
             nextPossibleStates.push(copyOfState);
 
         }
 
     }
-
 
     return nextPossibleStates;
 }

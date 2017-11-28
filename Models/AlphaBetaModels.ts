@@ -1,4 +1,4 @@
-import {BattleFieldInfo, BoardTile} from "./GameModels";
+import {BattleFieldInfo, BoardTile, MoveDirection} from "./GameModels";
 import {Location} from "./Location";
 import {Bomb} from './Explodable/Bomb/Bomb';
 import Missile from './Explodable/Missile/Missile';
@@ -16,21 +16,23 @@ export class State {
     };
     isFirstPlayerTurn: boolean;
     shouldTick: boolean;
+    firstMove: MoveDirection;
 
-    constructor(battleFieldInfo: BattleFieldInfo | State, isFirstPlayerTurn = true, shouldTick = false) {
-        this.Board = battleFieldInfo.Board;
-        this.BotLocation = battleFieldInfo.BotLocation;
-        this.OpponentLocations = battleFieldInfo.OpponentLocations;
-        this.Bombs = battleFieldInfo.Bombs;
-        this.Missiles = battleFieldInfo.Missiles;
+    constructor(battleFieldInfo: BattleFieldInfo | State) {
+        this.Board = battleFieldInfo.Board.slice();
+        this.BotLocation = new Location(battleFieldInfo.BotLocation.generateKey());
+        this.OpponentLocations = [new Location(battleFieldInfo.OpponentLocations[0].generateKey())];
+        this.Bombs = battleFieldInfo.Bombs.slice();
+        this.Missiles = battleFieldInfo.Missiles.slice();
 
         this.GameConfig = {
             MapWidth: battleFieldInfo.GameConfig.MapWidth,
             MapHeight: battleFieldInfo.GameConfig.MapHeight
         };
 
-        this.isFirstPlayerTurn = isFirstPlayerTurn;
-        this.shouldTick = shouldTick;
+        this.isFirstPlayerTurn = true;
+        this.shouldTick = false;
+        this.firstMove = -1;
     }
 
 }

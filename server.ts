@@ -41,23 +41,21 @@ app.post('/PerformNextMove', (req, res) => {
         checkWinConditions 	: checkWinConditionsFunction,
         uniqueKey		: uniqueKeyFunction,
         state 			: state,
-        depth 			: 1
+        depth 			: 2
     };
 
     const alphabeta = AlphaBetaConstructor( config );
 
-    alphabeta.incrementDepthForMilliseconds( 1000 , (result) => {
+    alphabeta.allSteps((result) => {
 
-        result.alphabeta.best();
-
-        let direction = getRandomInt(0,3);
+        //let direction = getRandomInt(0,3);
         //let action = getRandomInt(0,1);
-        let action = getRandomInt(0,2);
+        //let action = getRandomInt(0,2);
         //let action = getRandomInt(0,1) === 1 ? 2 : 0;
 
         res.send({
-            "Direction": direction,
-            "Action": action,
+            "Direction": result.firstMove,
+            "Action": 0,
             // "Action": getRandomInt(0,1) === 1 ? 2 : 0,
             "FireDirection": 0
         });
