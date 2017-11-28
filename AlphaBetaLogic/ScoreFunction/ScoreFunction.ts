@@ -36,7 +36,7 @@ export function scoreFunction(state: State , scoreCallback ) {
         worldSize: {xAxis: state.GameConfig.MapWidth, yAxis: state.GameConfig.MapHeight}
     };
 
-    let pathLength = aStar.run(startLocation, destination, environment).length;
+    let aStarResponse = aStar.run(startLocation, destination, environment);
 
-    scoreCallback( pathLength );
+    scoreCallback( aStarResponse[aStarResponse.length-1].fCost);
 }

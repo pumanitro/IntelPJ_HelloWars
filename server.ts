@@ -41,7 +41,7 @@ app.post('/PerformNextMove', (req, res) => {
         checkWinConditions 	: checkWinConditionsFunction,
         uniqueKey		: uniqueKeyFunction,
         state 			: state,
-        depth 			: 2
+        depth 			: 3
     };
 
     const alphabeta = AlphaBetaConstructor( config );
