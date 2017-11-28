@@ -1,8 +1,42 @@
 import {State} from "../../Models/AlphaBetaModels";
 
+import aStar = require('a-star-search');
+import {BoardTile} from "../../Models/GameModels";
+
+export function generateBlockedLocation(state: State) {
+
+    let blockedLocations = [];
+
+    state.Board.forEach((row, x) => {
+
+        row.forEach( (tileType, y) => {
+            if(tileType !== BoardTile.Empty)
+                blockedLocations.push({xAxis: x, yAxis: y})
+        });
+
+    });
+
+    return blockedLocations;
+}
+
 export function scoreFunction(state: State , scoreCallback ) {
 
-    let score = Math.sqrt(Math.pow((state.OpponentLocations[0].x - state.BotLocation.x), 2) + Math.pow((state.OpponentLocations[0].y - state.BotLocation.y), 2));
+    let startLocation = {
+      xAxis: state.BotLocation.x,
+      yAxis: state.BotLocation.y
+    };
 
-    scoreCallback( score );
+    let destination = {
+      xAxis: state.OpponentLocations[0].x,
+      yAxis: state.OpponentLocations[0].y
+    };
+
+    let environment = {
+        blockedLocations: generateBlockedLocation(state),
+        worldSize: {xAxis: state.GameConfig.MapWidth, yAxis: state.GameConfig.MapHeight}
+    };
+
+    let pathLength = aStar.run(startLocation, destination, environment).length;
+
+    scoreCallback( pathLength );
 }
